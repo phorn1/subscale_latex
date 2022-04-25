@@ -1,0 +1,76 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = de_DE
+
+%% Dies gibt Warnungen aus, sollten veraltete LaTeX-Befehle verwendet werden
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass[utf8,biblatex]{lni}
+\bibliography{lni-paper-example-de}
+
+%% Schöne Tabellen mittels \toprule, \midrule, \bottomrule
+\usepackage{booktabs}
+
+%% Zu Demonstrationszwecken
+\usepackage[math]{blindtext}
+\usepackage{mwe}
+
+%% BibLaTeX-Sonderkonfiguration,
+%% falls man schnell eine existierende Bibliographie wiederverwenden will, aber nicht die .bib-Datei händisch anpassen möchte.
+%% Bitte \iffalse und \fi entfernen, dann ist diese Konfiguration aktiviert.
+
+\iffalse
+\AtEveryBibitem{%
+  \ifentrytype{article}{%
+  }{%
+    \clearfield{doi}%
+    \clearfield{issn}%
+    \clearfield{url}%
+    \clearfield{urldate}%
+  }%
+  \ifentrytype{inproceedings}{%
+  }{%
+    \clearfield{doi}%
+    \clearfield{issn}%
+    \clearfield{url}%
+    \clearfield{urldate}%
+  }%
+}
+\fi
+
+\begin{document}
+%%% Mehrere Autoren werden durch \and voneinander getrennt.
+%%% Die Fußnote enthält die Adresse sowie eine E-Mail-Adresse.
+%%% Das optionale Argument (sofern angegeben) wird für die Kopfzeile verwendet.
+\title[Subscale]{Zusammenfassung des Subscale-Algorithmus}
+%%%\subtitle{Untertitel / Subtitle} % falls benötigt
+\author[Jonas Kienzle, Pascal Kunkel \and Pius Horn]
+{Jonas Kienzle\footnote{Hochschule Offenburg, EMI, Straße, Postleitzahl Ort, Land \email{emailaddress@author1}} \and
+ Pascal Kunkel\footnote{Hochschule Offenburg, EMI, Address, Country \email{emailaddress@author2}} \and
+Pius Horn\footnote{Hochschule Offenburg, EMI, Schubertstraße 5, 77948, Friesenheim, Deutschland \email{phorn2@stud.hs-offenburg.de}}}
+%\startpage{} % Beginn der Seitenzählung für diesen Beitrag
+%\editor{Herausgeber et al.}    % Namen der Herausgeber
+%\booktitle{Name-der-Konferenz} % Name des Tagungsband; optional Kurztitel
+%\yearofpublication{2022}
+%%%\lnidoi{18.18420/provided-by-editor-02} % Falls bekannt
+\maketitle
+
+\begin{abstract}
+Die \LaTeX-Klasse \texttt{lni} setzt die Layout-Vorgaben für Beiträge in LNI Konferenzbänden um.
+Dieses Dokument beschreibt ihre Verwendung und ist ein Beispiel für die entsprechende Darstellung.
+Der Abstract ist ein kurzer Überblick über die Arbeit der zwischen 70 und 150 Wörtern lang sein und das Wichtigste enthalten sollte.
+Die Formatierung erfolgt automatisch innerhalb des abstract-Bereichs.
+\end{abstract}
+
+\begin{keywords}
+LNI Guidelines \and \LaTeX Vorlage
+\end{keywords}
+
+\section{Verwendung}
+
+
+
+%% \bibliography{lni-paper-example-de} ist hier nicht erlaubt: biblatex erwartet dies bei der Preambel
+%% Starten Sie "biber paper", um eine Biliographie zu erzeugen.
+\printbibliography
+
+\end{document}
