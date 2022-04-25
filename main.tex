@@ -67,27 +67,34 @@ Subscale \and DBSCAN \and
 
 \section{Einleitung}
 Eine wichtige Herausforderung in Datascience ist es in großen
-Datenmengen Zusammenhänge in Form von Anhäufungen ähnlicher Daten
-zu erkennen. Dies wird auch Cluster genannt.
-Dieser Bereich der Datascience findet unter anderem in den
-Domänen Biologie, maschinelles Sehen, Astronomie und Auswertung
-von personellen Daten Anwendung.
-In der Medizintechnik können solche Algorithmen genutzt werden
+Datenmengen Zusammenhänge in Form von Anhäufungen ähnlicher Daten,
+beziehungsweise Clustern zu erkennen.
+Das Auffinden von Clustern findet unter anderem in den
+Domänen Biologie, maschinelles Sehen, Astronomie und der Auswertung
+von personenbezogenen Daten Anwendung.
+In der Medizintechnik können solche Algorithmen genutzt werden,
 um Risikogruppen zu identifizieren.
-Dabei stellt ein Patient einen Datensatz dar und seine
+Ein Patient stellt dabei einen Datensatz dar und seine
 Gesundheitsdaten wie das Blutbild, Alter und Geschlecht
 die entsprechenden Attribute.
-Jedes Attribut ist in diesem Fall eine Dimension.
-Das Ziel ist es in einer großen Menge von
-Patienten Zusammenhänge zwischen den Attributen zu finden.
+Jeder Datensatz ist somit ein Vektor in einem multidimensionalen Raum,
+wobei jedes Attribut eine Dimension darstellt.
+Ziel ist es nun in der großen und hochdimensionalen Datenmenge
+Cluster, beziehungsweise dichte Regionen zu erkennen.
+Bei dem hierfür verwendeten Clustering handelt es sich um einen sogenannten
+unüberwachten Datamining Prozess, da initial keine Kenntnis über die
+Datenverteilung bekannt ist.
+
 Mit steigender Anzahl von Dimensionen wird es schwierig
 zusammenhängende Cluster zu ermitteln,
 da bei einer großen Menge von Attributen die einzelnen
 Attribute nicht so sehr ins Gewicht fallen.
 Deswegen wird versucht die unwichtigen Attribute auszublenden.
-Man sucht also in einem Subspace nach Clustern.
+Außerdem bilden sich die Gruppierungen unterschiedlich,
+je nachdem welche Attribute ausgeblendet werden.
+Die Cluster sind also in Subspaces zu suchen.
 Mit der Anzahl der Dimensionen wächst die Anzahl der
-möglichen Subspaces exponentiell schnell, was die
+möglichen Subspaces exponentiell, was die
 Suche nach relevanten Subspaces sehr rechenintensiv
 werden lässt. Hier setzt der Subscale-Algorithmus an,
 da dieser mit hochdimensionalen Datensets besser wie
