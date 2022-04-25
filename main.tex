@@ -44,8 +44,8 @@
 \title[Subscale]{Zusammenfassung des Subscale-Algorithmus}
 %%%\subtitle{Untertitel / Subtitle} % falls benötigt
 \author[Jonas Kienzle, Pascal Kunkel \and Pius Horn]
-{Jonas Kienzle\footnote{Hochschule Offenburg, EMI, Straße, Postleitzahl Ort, Land \email{emailaddress@author1}} \and
- Pascal Kunkel\footnote{Hochschule Offenburg, EMI, Address, Country \email{emailaddress@author2}} \and
+{Jonas Kienzle\footnote{Hochschule Offenburg, EMI, Heimgasse 23a, 77797, Ohlsbach, Deutschland \email{jkienzle@stud.hs-offenburg.de}} \and
+ Pascal Kunkel\footnote{Hochschule Offenburg, EMI, Im Langenacker 7, 76534, Baden-Baden, Deutschland \email{pkunkel1@stud.hs-offenburg.de}} \and
 Pius Horn\footnote{Hochschule Offenburg, EMI, Schubertstraße 5, 77948, Friesenheim, Deutschland \email{phorn2@stud.hs-offenburg.de}}}
 %\startpage{} % Beginn der Seitenzählung für diesen Beitrag
 %\editor{Herausgeber et al.}    % Namen der Herausgeber
@@ -62,10 +62,44 @@ Die Formatierung erfolgt automatisch innerhalb des abstract-Bereichs.
 \end{abstract}
 
 \begin{keywords}
-Subscale \and DBSCAN
+Subscale \and DBSCAN \and
 \end{keywords}
 
-\section{Verwendung}
+\section{Einleitung}
+Eine wichtige Herausforderung in Datascience ist es in großen
+Datenmengen Zusammenhänge in Form von Anhäufungen ähnlicher Daten
+zu erkennen. Dies wird auch Cluster genannt.
+Dieser Bereich der Datascience findet unter anderem in den
+Domänen Biologie, maschinelles Sehen, Astronomie und Auswertung
+von personellen Daten Anwendung.
+In der Medizintechnik können solche Algorithmen genutzt werden
+um Risikogruppen zu identifizieren.
+Dabei stellt ein Patient einen Datensatz dar und seine
+Gesundheitsdaten wie das Blutbild, Alter und Geschlecht
+die entsprechenden Attribute.
+Jedes Attribut ist in diesem Fall eine Dimension.
+Das Ziel ist es in einer großen Menge von
+Patienten Zusammenhänge zwischen den Attributen zu finden.
+Mit steigender Anzahl von Dimensionen wird es schwierig
+zusammenhängende Cluster zu ermitteln,
+da bei einer großen Menge von Attributen die einzelnen
+Attribute nicht so sehr ins Gewicht fallen.
+Deswegen wird versucht die unwichtigen Attribute auszublenden.
+Man sucht also in einem Subspace nach Clustern.
+Mit der Anzahl der Dimensionen wächst die Anzahl der
+möglichen Subspaces exponentiell schnell, was die
+Suche nach relevanten Subspaces sehr rechenintensiv
+werden lässt. Hier setzt der Subscale-Algorithmus an,
+da dieser mit hochdimensionalen Datensets besser wie
+vergleichbare Algorithmen wie CLIQUE, SUBCLU und INSCY
+skaliert.
+
+\section{DBSCAN}
+
+\subsection{Funktionsweise}
+\section{Subscale Clustering}
+\subsection{Funktionsweise}
+\section{Fazit}
 
 
 
