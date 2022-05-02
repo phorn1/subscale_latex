@@ -105,6 +105,67 @@ skaliert.
 
 \subsection{Funktionsweise}
 \section{Subscale Clustering}
+
+Dem Subscale Algorithmus liegt ein einfaches geometrisches Prinzip zu Grunde. 
+Dies besteht darin, dass die Projektion eines Clusters in einem höherdimensionalen Raum auf einen Raum mit niederer Dimension ebenfalls Cluster bildet. 
+Der Umkehrschluss gilt hier allerdings nicht. 
+Es kann also nicht gesagt werden, dass in einer gemeinsamen höheren Dimension Clsuter entstehen, weil Cluster in den Teildimensionen entstehen. 
+Dies lässt sich anschaulich an einem Beispiel zeigen.
+Man stelle sich zwei Punkte vor. 
+Der erste befindet sich im Ursprung. 
+Der zweite Punkt ist in jeder Dimension um die maximal erlaubte Distanz vom Ursprung verschieden. 
+Betrachtet man die Punkte nun als Projektion auf einer Achse stellt man fest, dass die Punkte um die maximal erlaubte Distanz verschieden sind. 
+Sie bilden also gerade noch eine Dense Unit. 
+Sobald allerdings mehrere Dimensionen betrachtet werden ist die Distanz zwischen den Punkte größer, als der zuvor festgelegte Grenzwert. 
+Die Folge davon ist dann, dass die beiden Punkte nicht mehr als Teil der selben Dense Unit angesehen werden dürfen. 
+
+Um solche Fälle auszuschließen wird nach dem Suchen der Teilräume, in denen Cluster entstehen könnten, noch der DBScan Algorithmus ausgeführt. 
+DBScan wird durch Subscale einmal für jeder gefundenen Subspace aufgerufen. 
+DBScan beschreibt einen Algorithmus zum Finden von Clustern in einem vorgegebenen Raum. 
+Ein Cluster wird von DBScan durch zwei wesentliche Punkte beschrieben. 
+Der erste ist eine Angabe zu der maximalen Distanz zwischen zwei Datenpunkten. 
+Diese Angabe wird Epsilon genannt und muss von dem Anwender des Algorithmus definiert werden. 
+Sollte die Distanz zweier Datenpunkte kleiner sein, als Epsilon, gelten die Datenpunkt als Nachbarn. 
+Unterscheiden sich die Datenpunkte um mehr als Epsilon gelten die Punkte nicht Nachbarn. 
+Der zweite wichtige Parameter muss auch durch den Nutzer festgelegt werden und stellt eine Mindestgröße für die Anzahl an Nachbarn dar, welche ein Datenpunkt haben muss, um als Kernpunkt zu gelten. 
+Ein Clsuter im DBScan Algorithmus baut sich aus zwei Arten von Punkten auf. 
+Diese sind Kernpunkte und Randpunkte. 
+Kernpunkte sind alle Punkte, welche die entsprechende Mindestanzahl an Nachbarn erfüllen. 
+Randpunkte haben einen Kernpunkt als Nachbarn, allerdings selbst nicht genug Nachbarn, um als Kernpunkt zu zählen. 
+Ein Cluster besteht also aus Kernpunkten und wird durch die Randpunkte begrenzt. 
+
+
+Ein Problem, welches zu hohen Laufzeiten führen kann ist der Vergleich zwischen zwei Dense Units in einem Subspace. 
+Vergleicht man die vorkommenden Punkte einzeln miteinander ist die ein rechenaufwendiger Prozess. 
+Daher wird beim Subscale Algorithmus ein anderer Ansatz gewählt. 
+Dieser Ansatz bedient sich dem Prinzip einer Hash Tabelle, wonach aus einem einzigartigen Schlüssel eine Speicheraddresse errechnet wird, an welcher dann die Daten liegen. 
+Wenn die Art der Schlüsselgenerierung von der Zusammensetzung der entsprechenden Dense Units abhängt, gilt, dass ein Konflikt beim Speichern einer Dense Unit bedeutet, dass diese Kombination von Punkten bereits in der Hash Tabelle gespeichert wurde. 
+Es existiert also eventuell ein Subspace Cluster in einem Raum, welcher aus der entsprechenden gefundenen Dimensionen zusammengesetzt ist. 
+Nun muss noch ein gutes Verfahren gefunden werden, welches die Datenpunkte zu einem eindeutigen Schlüssel kombiniert. 
+Beim Subscale Algorithmus wird hier auf die Forschung von Lehner und Erdös zurückgegriffen. 
+Im Rahmen deren Arbeit wurde festgestellt, dass die Summe größer Integer mit sehr hoher Wahrscheinlichkeit bei unterschiedlichen Summanten zu einer unterschiedlichen Summe führt. 
+Um dies innerhalb des Subscale Algorithmus zu verwenden wird nun zu Beginn jeder Datenpunkt mit einem möglichst größen Integer Wert als ID gekennzeichnet. 
+Wenn nun ein Cluster in einem Unterraum zu der entsprechenden Hash Tabelle hinzugefügt werden soll, kann die Summe der IDs der entsprechenden Datenpunkte als Schlüssel verwendet werden. 
+Damit hat man nun eine schnelle Möglichkeit, um zu verifizieren, ob kleinere Cluster in mehreren Dimensionen vorkommen. 
+
+
+Bei der Durchführung des Subscale Algorithmus wird nun, wie bereits erwähnt, jedem Datenpunkt eine eindeutige ID in Form einer möglichst großen Ganzzahl zugewiesen. 
+Im Anschluss daran wird eine Hash Tabelle generiert, welche als Schlüssel die Summe der Punkte, welche einer Dense Unit angehören, enthält. 
+Die Werte an jedem Eintrag der Hash Tabelle sind eine Liste an Dimensionen, welche gemeinsam der Subraum bilden und eine Auflistung der Datenpunkte. 
+Die Tabelle sollte anfangs noch leer sein. 
+Nun wird in einer ersten Schleife über alle Dimensionen iteriert. 
+Für jede Dimension wird dann eine Liste der in dem entsprechenden eindimensionalen Raum vorkommenden Dense Units erstellt. 
+--einfügen sub dense unit
+Sobald die Dense Units generiert sind wird für jede Dense Unit geprüft, ob bereits ein Eintrag in der Hash Tabelle vorhanden ist. 
+Der Schlüssel wird als Summe der IDs der Datenpunkte der Dense Unit berechnet. 
+Wenn es zu einer Kollision beim Zugriff auf die entsprechende Stelle in der Hash Tabelle kommt bedeutet das, dass selben Punkte bereits in einer anderen Dimension eine Dense Unit gebildet haben. 
+Damit wird es wahrscheinlich, dass es in dem gemeinsamen Raum auch ein Cluster gibt. 
+Um dies als Daten zu reprensentieren wird die Liste an Dimensionen in dem aktuellen Eintrag angepasst, indem die aktuelle Dimension hinzugefügt wird. 
+Wenn es zu keiner Kollision kommt bedeutet dies, dass diese Kombination aus Datenpunkten bisher in keiner anderen Dimension eine Dense Unit gebildet haben. 
+In diesem Fall wird ein neuer Eintrag in der Hast Tabelle angelegt. 
+Sobald dies in allen Dimensionen erfolgt ist, werden die Daten umgruppiert, sodass sie über den Subraum zu erreichen sind. 
+Der DBScan Algorithmus wird dann für jeden Subraum erneut ausgeführt, um zu verifizieren, dass alle Cluster valide sind. 
+
 \subsection{Funktionsweise}
 \section{Fazit}
 
