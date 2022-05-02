@@ -188,9 +188,30 @@ Der \emph{Arbeitsschritt 1} benötigt gegenüber \emph{Arbeitsschritt 2} mehr al
 Grund dafür ist, dass die von DBSCAN zu durchsuchenden Subspaces schon auf diejenigen Punkte reduziert sind,
 welche mit einer hohen Wahrscheinlichkeit über Cluster verfügen.
 Die Durchführung von DBSCAN ist somit relativ effizient möglich.
+In der Literatur finden sich bis dato nach unserem Wissensstand keine Informationen darüber,
+wie die initialen Inputparameter von Subscale für die Ermittlung der 1-D Dichtepunkte effizient ermittelt werden können.
 
+Für die Wahl der Inputparametern für DBSCAN gibt es in der Literatur hingegen verschiedene heuristische Ansätze.
+Der naive Ansatz wäre es, bei DBSCAN dieselben Werte für $\epsilon$ und $\tau$ wie auch bei Subscale zu verwenden.
+Es ist jedoch besser, wenn die Inputwerte den zu untersuchenden Subspaces individuell angepasst werden.
+Da die Distanz zwischen den Punkten mit der wachsenden Anzahl an Dimensionen größer wird,
+ist $\epsilon$ in hochdimensionalen Räumen zum Beispiel eher größer zu wählen.
+Je höher die Dimensionalität, desto schwieriger ist jedoch das Auffinden eines geeigneten $\epsilon$-Wertes,
+da mit der Dimensionalität gleichzeitig der Kontrast zwischen Distanzen und somit die Aussagekraft der Distanzen abnimmt \cite{TODS4203-19}.
+In der Thesis von Amardeep Kaur über den Subscale Algorithmus \cite{thesis} wird daher vorgeschlagen den kleinstmöglichen Abstand
+zwischen zwei beliebigen 1-D Projektionen von Punkten im gegebenen Datensatz als Wert für $\epsilon$ zu wählen.
+Prinzipiell ist $\epsilon$ möglichst klein zu wählen, um lediglich jene Cluster zu finden,
+welche tatsächlich auf einen Zusammenhang zwischen Daten zurückzuführen sind. Zudem hängt $\epsilon$
+von der verwendeten Distanzfunktion ab \cite{TODS4203-19}.
+In manchen Fällen kann außerdem Domänenwissen für die Wahl von $\epsilon$ von Vorteil sein.
 
+Der Parameter $\tau$ ist hingegen einfacher zu bestimmen.
+Seine Aufgabe ist es die Dichteabschätzung der Cluster zu "glätten".
+Es wird empfohlen $\tau$ auf den doppelten Wert von der Anzahl Dimensionen festzulegen (bei zwei-dimensionalen Daten
+wäre $\tau$ = 4 ein vielversprechender Input).
+Interessanterweise scheinen die Ergebniscluster eher von $\epsilon$ als von $\tau$ abhängig zu sein \cite{TODS4203-19}.
 
+\subsection{Metriken zur Erkennung suboptimaler Inputparameter}
 
 
 %% \bibliography{lni-paper-example-de} ist hier nicht erlaubt: biblatex erwartet dies bei der Preambel
