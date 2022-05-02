@@ -167,7 +167,29 @@ Sobald dies in allen Dimensionen erfolgt ist, werden die Daten umgruppiert, soda
 Der DBScan Algorithmus wird dann für jeden Subraum erneut ausgeführt, um zu verifizieren, dass alle Cluster valide sind. 
 
 \subsection{Funktionsweise}
-\section{Fazit}
+\section{Bestimmung der Inputparameter}
+Typischer Weise ist die Dichteverteilung der zu untersuchenden Daten
+initial unbekannt.
+Die Qualität der Ergebnisse des Subscale-Algorithmus hängen jedoch
+stark von den gewählten Input-Parametern $\epsilon$ und $\tau$ ab,
+welche in der direkten Abhängigkeit zu der Dichteverteilung stehen.
+Diese Parameter zu finden stellt eine herausfordernde Aufgabe dar.
+Bei der Anwendung des Subscale Algorithmus sind die Benutzervariablen $\epsilon$ und $\tau$ in zwei Arbeitsschritten relevant:
+\begin{description}
+\item[Arbeitsschritt 1]\hfill \\
+Die Inputparameter werden von Subscale initial zur Ermittlung der 1-D Dichtepunkte benötigt.
+Mit diesen Dichtepunkten können durch den Subscale Algorithmus die maximalen Subspaces identifiziert werden.
+\item[Arbeitsschritt 2]\hfill \\
+  Diese gefundenen maximalen Subspaces sollen anschließend jeweils auf Cluster untersucht werden.
+  Die Analyse dieser Subspaces nach Cluster erfolgt durch den DBSCAN Algorithmus, welcher ebenfalls $\epsilon$ und $\tau$
+  als Input Parameter benötigt.
+\end{description}
+Der \emph{Arbeitsschritt 1} benötigt gegenüber \emph{Arbeitsschritt 2} mehr als 95 \% der Rechenleistung \Cite{JournalArticel}.
+Grund dafür ist, dass die von DBSCAN zu durchsuchenden Subspaces schon auf diejenigen Punkte reduziert sind,
+welche mit einer hohen Wahrscheinlichkeit über Cluster verfügen.
+Die Durchführung von DBSCAN ist somit relativ effizient möglich.
+
+
 
 
 
