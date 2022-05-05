@@ -66,44 +66,40 @@ Subscale \and DBSCAN \and
 \end{keywords}
 
 \section{Einleitung}
-Eine wichtige Herausforderung in Datascience ist es in großen
-Datenmengen Zusammenhänge in Form von Anhäufungen ähnlicher Daten,
-beziehungsweise Clustern zu erkennen.
-Das Auffinden von Clustern findet unter anderem in den
-Domänen Biologie, maschinelles Sehen, Astronomie und der Auswertung
-von personenbezogenen Daten Anwendung.
-In der Medizintechnik können solche Algorithmen genutzt werden,
-um Risikogruppen zu identifizieren.
-Ein Patient stellt dabei einen Datensatz dar und seine
-Gesundheitsdaten wie das Blutbild, Alter und Geschlecht
-die entsprechenden Attribute.
+Eine wichtige Herausforderung in Datascience ist das Erkennen der Zusammenhänge von Daten in
+großen Datenmengen.
+Diese Erkennung kann in Form von Anhäufungen ähnlicher Daten, in sogenannten Clustern, erfolgen.
+Das Auffinden dieser Cluster findet unter anderem in den Domänen Biologie, maschinelles Sehen und
+Astronomie Anwendung.
+Insbesondere in der Auswertung von personenbezogenen Daten ist Clustering aufgrund der großen
+Datenmengen, die durch Big Data entstehen, nicht mehr wegzudenken. 
+Das Suchen und Finden von Clustern kann unter anderem in der Medizintechnik genutzt werden, um
+beispielsweise Risikogruppen zu identifizieren. 
+Hierbei stellt ein Patient, beziehungsweise eine Patientin, einen Datensatz dar.
+Die jeweiligen Gesundheitsdaten, wie das Blutbild sowie Alter und Geschlecht, definieren die
+entsprechenden Attribute. 
 Jeder Datensatz ist somit ein Vektor in einem multidimensionalen Raum,
-wobei jedes Attribut eine Dimension darstellt.
-Ziel ist es nun in der großen und hochdimensionalen Datenmenge
-Cluster, beziehungsweise dichte Regionen zu erkennen.
+wobei jedes Attribut einer Dimension entspricht.
+Das Ziel ist es, in diesem großen und hochdimensionalen Datensatz, dichte Regionen zu erkennen,
+die als Cluster definiert werden können.
 Bei dem hierfür verwendeten Clustering handelt es sich um einen sogenannten
-unüberwachten Datamining Prozess, da initial keine Kenntnis über die
+unüberwachten Datamining-Prozess, da initial keine Kenntnis über die
 Datenverteilung bekannt ist.
-
 Mit steigender Anzahl von Dimensionen wird es schwierig
-zusammenhängende Cluster zu ermitteln,
-da bei einer großen Menge von Attributen die einzelnen
-Attribute nicht so sehr ins Gewicht fallen.
-Deswegen wird versucht die unwichtigen Attribute auszublenden.
-Außerdem bilden sich die Gruppierungen unterschiedlich,
-je nachdem welche Attribute ausgeblendet werden.
-Die Cluster sind also in Subspaces zu suchen.
-Mit der Anzahl der Dimensionen wächst die Anzahl der
-möglichen Subspaces exponentiell, was die
-Suche nach relevanten Subspaces sehr rechenintensiv
-werden lässt. Hier setzt der Subscale-Algorithmus an,
-da dieser mit hochdimensionalen Datensets besser wie
-vergleichbare Algorithmen wie CLIQUE, SUBCLU und INSCY
-skaliert.
+zusammenhängende Cluster zu ermitteln.
+Grund hierfür ist, dass bei einer großen Menge von Attributen die jeweiligen einzelnen
+Attribute geringer gewichtet werden.
+Infolgedessen versuchen unterschiedliche Algorithmen zum Erkennen von Clustern unwichtige 
+Attribute auszublenden, um diese finden zu können. 
+% Außerdem bilden sich die Gruppierungen unterschiedlich,
+% je nachdem welche Attribute ausgeblendet werden.
+%nochmal nachfragen was damit gemeint war
+Anlässlich der wachsenden Anzahl der Dimensionen, wächst auch die Anzahl der möglichen
+Subspaces exponentiell, wodurch die Suche nach relevanten Subspaces sehr rechenintensiv wird.  
+Hier setzt der Subscale-Algorithmus an, da dieser mit hochdimensionalen Datensets besser wie
+vergleichbare Algorithmen wie CLIQUE, SUBCLU und INSCY skaliert.
 
-\section{DBSCAN}
 
-\subsection{Funktionsweise}
 \section{Subscale Clustering}
 
 Dem Subscale Algorithmus liegt ein einfaches geometrisches Prinzip zu Grunde. 
