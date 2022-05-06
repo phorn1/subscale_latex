@@ -115,16 +115,17 @@ Sie bilden also gerade noch eine Dense Unit.
 Sobald allerdings mehrere Dimensionen betrachtet werden ist die Distanz zwischen den Punkte größer, als der zuvor festgelegte Grenzwert. 
 Die Folge davon ist dann, dass die beiden Punkte nicht mehr als Teil der selben Dense Unit angesehen werden dürfen. 
 
-Um solche Fälle auszuschließen wird nach dem Suchen der Teilräume, in denen Cluster entstehen könnten, noch der DBScan Algorithmus ausgeführt. 
+Der Subscale Algorithmus findet nun solche Teilräume. 
+Um dennoch solche Fälle auszuschließen wird nach dem Suchen der Teilräume, in denen Cluster entstehen könnten, noch der DBScan Algorithmus ausgeführt. 
 DBScan wird durch Subscale einmal für jeder gefundenen Subspace aufgerufen. 
 DBScan beschreibt einen Algorithmus zum Finden von Clustern in einem vorgegebenen Raum. 
 Ein Cluster wird von DBScan durch zwei wesentliche Punkte beschrieben. 
 Der erste ist eine Angabe zu der maximalen Distanz zwischen zwei Datenpunkten. 
-Diese Angabe wird Epsilon genannt und muss von dem Anwender des Algorithmus definiert werden. 
-Sollte die Distanz zweier Datenpunkte kleiner sein, als Epsilon, gelten die Datenpunkt als Nachbarn. 
-Unterscheiden sich die Datenpunkte um mehr als Epsilon gelten die Punkte nicht Nachbarn. 
+Diese Angabe wird $\epsilon$ genannt und muss von dem Anwender des Algorithmus definiert werden. 
+Sollte die Distanz zweier Datenpunkte kleiner sein, als $\epsilon$, gelten die Datenpunkt als Nachbarn. 
+Unterscheiden sich die Datenpunkte um mehr als $\epsilon$ gelten die Punkte nicht Nachbarn. 
 Der zweite wichtige Parameter muss auch durch den Nutzer festgelegt werden und stellt eine Mindestgröße für die Anzahl an Nachbarn dar, welche ein Datenpunkt haben muss, um als Kernpunkt zu gelten. 
-Ein Clsuter im DBScan Algorithmus baut sich aus zwei Arten von Punkten auf. 
+Ein Cluster im DBScan Algorithmus baut sich aus zwei Arten von Punkten auf. 
 Diese sind Kernpunkte und Randpunkte. 
 Kernpunkte sind alle Punkte, welche die entsprechende Mindestanzahl an Nachbarn erfüllen. 
 Randpunkte haben einen Kernpunkt als Nachbarn, allerdings selbst nicht genug Nachbarn, um als Kernpunkt zu zählen. 
@@ -143,6 +144,8 @@ Im Rahmen deren Arbeit wurde festgestellt, dass die Summe größer Integer mit s
 Um dies innerhalb des Subscale Algorithmus zu verwenden wird nun zu Beginn jeder Datenpunkt mit einem möglichst größen Integer Wert als ID gekennzeichnet. 
 Wenn nun ein Cluster in einem Unterraum zu der entsprechenden Hash Tabelle hinzugefügt werden soll, kann die Summe der IDs der entsprechenden Datenpunkte als Schlüssel verwendet werden. 
 Damit hat man nun eine schnelle Möglichkeit, um zu verifizieren, ob kleinere Cluster in mehreren Dimensionen vorkommen. 
+Die Subspaces, welche bei Subscale gefunden werden sind maximale Subspaces. 
+Das bedeutet, dass für die entstandenen Dense Units gilt, dass die maximale Anzahl an Dimensionen im Subspace vorhanden ist, sodass noch eine Dense Unit entsteht \Cite{ConferencePaper}. 
 
 
 Bei der Durchführung des Subscale Algorithmus wird nun, wie bereits erwähnt, jedem Datenpunkt eine eindeutige ID in Form einer möglichst großen Ganzzahl zugewiesen. 
@@ -151,10 +154,9 @@ Die Werte an jedem Eintrag der Hash Tabelle sind eine Liste an Dimensionen, welc
 Die Tabelle sollte anfangs noch leer sein. 
 Nun wird in einer ersten Schleife über alle Dimensionen iteriert. 
 Für jede Dimension wird dann eine Liste der in dem entsprechenden eindimensionalen Raum vorkommenden Dense Units erstellt. 
---einfügen sub dense unit
 Sobald die Dense Units generiert sind wird für jede Dense Unit geprüft, ob bereits ein Eintrag in der Hash Tabelle vorhanden ist. 
 Der Schlüssel wird als Summe der IDs der Datenpunkte der Dense Unit berechnet. 
-Wenn es zu einer Kollision beim Zugriff auf die entsprechende Stelle in der Hash Tabelle kommt bedeutet das, dass selben Punkte bereits in einer anderen Dimension eine Dense Unit gebildet haben. 
+Wenn es zu einer Kollision beim Zugriff auf die entsprechende Stelle in der Hash Tabelle kommt bedeutet das, dass die selben Punkte bereits in einer anderen Dimension eine Dense Unit gebildet haben. 
 Damit wird es wahrscheinlich, dass es in dem gemeinsamen Raum auch ein Cluster gibt. 
 Um dies als Daten zu reprensentieren wird die Liste an Dimensionen in dem aktuellen Eintrag angepasst, indem die aktuelle Dimension hinzugefügt wird. 
 Wenn es zu keiner Kollision kommt bedeutet dies, dass diese Kombination aus Datenpunkten bisher in keiner anderen Dimension eine Dense Unit gebildet haben. 
