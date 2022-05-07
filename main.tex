@@ -196,7 +196,7 @@ Da die Distanz zwischen den Punkten mit der wachsenden Anzahl an Dimensionen gr�
 ist $\epsilon$ in hochdimensionalen Räumen zum Beispiel eher größer zu wählen.
 Je höher die Dimensionalität, desto schwieriger ist jedoch das Auffinden eines geeigneten $\epsilon$-Wertes,
 da mit der Dimensionalität gleichzeitig der Kontrast zwischen Distanzen und somit die Aussagekraft der Distanzen abnimmt \cite{TODS4203-19}.
-In der Thesis von Amardeep Kaur über den Subscale Algorithmus \cite{thesis} wird daher vorgeschlagen den kleinstmöglichen Abstand
+In der Thesis von Amardeep Kaur über den Subscale Algorithmus \cite{THESIS} wird daher vorgeschlagen den kleinstmöglichen Abstand
 zwischen zwei beliebigen 1-D Projektionen von Punkten im gegebenen Datensatz als Wert für $\epsilon$ zu wählen.
 Prinzipiell ist $\epsilon$ möglichst klein zu wählen, um lediglich jene Cluster zu finden,
 welche tatsächlich auf einen Zusammenhang zwischen Daten zurückzuführen sind. Zudem hängt $\epsilon$
@@ -209,8 +209,29 @@ Es wird empfohlen $\tau$ auf den doppelten Wert von der Anzahl Dimensionen festz
 wäre $\tau$ = 4 ein vielversprechender Input).
 Interessanterweise scheinen die Ergebniscluster eher von $\epsilon$ als von $\tau$ abhängig zu sein \cite{TODS4203-19}.
 
-\subsection{Metriken zur Erkennung suboptimaler Inputparameter}
+\subsection{Erkennung von suboptimalen Inputparametern bei DBSCAN}
+Nachfolgend werden zwei Merkmale besprochen, mit welchen degenerierte DBSCAN-Ergebnisse erkannt werden können:
 
+Das erste Merkmal ist die relative Anzahl an Punkten die sich innerhalb von Clustern befinden,
+bezüglich der absoluten Anzahl Punkten innerhalb des zu untersuchenden Subraums.
+Befinden sich zu viele Punkte innerhalb von Clustern, ist der Rausch-Wert entsprechend groß.
+$\epsilon$ und $\tau$ sollten in diesem Fall angepasst werden.
+
+Das zweite Merkmal ist die Anzahl an Punkten innerhalb des größten Ergebnis-Clusters.
+Befinden sich 20-50\% der Clusterpunkte innerhalb eines einzelnen Clusters,
+kann das ein Hinweis darauf sein, dass sich noch verborgene Strukturen innerhalb dieses großen Clusters befinden.
+Diese verborgenen Strukturen werden eventuell mit einem kleiner gewählten $\epsilon$ aufgedeckt.
+Wenn auch dies keine Abhilfe verschafft,
+kann in diesen Fällen auch ein alternativer Algorithmus
+wie zum Beispiel \emph{OPTICS} oder \emph{HDBSCAN} geeigneter sein, da mit ihnen hierarchische Strukturen besser erkennen können.
+
+Beide dieser Kriterien eignen sich nicht um die Ergebnisqualität von DBSCAN zu quantifizieren \cite{TODS4203-19}.
+Sie können jedoch hilfreich sein,
+um degenerierte Ergebnisse zu erkennen und um geeignete Werte für $\epsilon$ und $\tau$
+zu finden.
+Ein Erhöhen des Parameters $\epsilon$ erhöht die Anzahl der Clusterpunkte und die größe des größten Clusters und
+verringert meistens die Gesamtanzahl von Clustern. Ein Vermindern von $\epsilon$ reduziert dementsprechend das Rauschen
+und führt zu kleineren Clustern.
 
 %% \bibliography{lni-paper-example-de} ist hier nicht erlaubt: biblatex erwartet dies bei der Preambel
 %% Starten Sie "biber paper", um eine Biliographie zu erzeugen.
