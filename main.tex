@@ -55,10 +55,21 @@ Pius Horn\footnote{Hochschule Offenburg, EMI, Schubertstraße 5, 77948, Friesenh
 \maketitle
 
 \begin{abstract}
-Die \LaTeX-Klasse \texttt{lni} setzt die Layout-Vorgaben für Beiträge in LNI Konferenzbänden um.
-Dieses Dokument beschreibt ihre Verwendung und ist ein Beispiel für die entsprechende Darstellung.
-Der Abstract ist ein kurzer Überblick über die Arbeit der zwischen 70 und 150 Wörtern lang sein und das Wichtigste enthalten sollte.
-Die Formatierung erfolgt automatisch innerhalb des abstract-Bereichs.
+Das Erkennen von Clustern ist ein wichtiger Teil der Datascience, der auch in vielen anderen Bereichen Anwendung findet.
+Das Finden dieser gestaltet sich mit zunehmender Dimensionalität der Daten schwieriger.
+Dafür ist das automatische Wachsen der Abstände zwischen den einzelnen Punkten verantwortlich.
+Zudem gestaltet sich das Suchen in höherdimensionalen Daten rechenaufwendig, weswegen versucht wird, Culster in niedrigdimensionalen Subräumen zu finden.
+Aus diesem Grund stellt diese Arbeit den Algorithmus Subscale vor, welcher das Erkennen von Clustern in Subspaces recheneffizient durchführt.
+Subscale betrachtet immer eine Dimension für sich und sucht in dieser Cluster. 
+Dabei wird die Dichte von Punkten in der jeweiligen Dimension verglichen.
+Hierfür geben die Inputparameter $\epsilon$ und $\tau$ den Maximalabstand zwischen zwei benachbarten Punken sowie das Minimum an Punkten in einem Cluster an.
+Anschließend werden diese mit Clustern anderer Dimensionen verglichen und falsch erkannte Cluster somit eliminiert.
+Zur Erkennung der Cluster wird ein geometrisches Maß für Dichte angewandt. 
+Das besondere hierbei ist, dass jede Dimension nur einmal überprüft werden muss.
+Ab dann ist kein wiederholter Vergleich mit anderen Dimensionen notwendig.
+Möglich wird dies dadurch, dass erkannte Cluster gehasht werden und anschließend nur noch die Hashtabellen verglichen werden.
+Abschließend geht diese Arbeit auf die Bestimmung von $\epsilon$ und $\tau$ ein und klärt, welchen Effekt diese Inputparameter auf die Ergebnisse beziehungsweise die Rechenleistung haben.
+
 \end{abstract}
 
 \begin{keywords}
