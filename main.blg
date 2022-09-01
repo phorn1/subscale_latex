@@ -1,0 +1,19 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'main.blg'
+[164] biber-MSWIN64:340> INFO - === 
+[224] Biber.pm:418> INFO - Reading 'main.bcf'
+[333] Biber.pm:972> INFO - Found 4 citekeys in bib section 0
+[348] Biber.pm:4383> INFO - Processing section 0
+[367] Biber.pm:4574> INFO - Looking for bibtex file 'lni-paper-example-de.bib' for section 0
+[425] bibtex.pm:1713> INFO - LaTeX decoding ...
+[438] bibtex.pm:1518> INFO - Found BibTeX data source 'lni-paper-example-de.bib'
+[498] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[498] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[498] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'de-DE'
+[498] Biber.pm:4209> INFO - No sort tailoring available for locale 'de-DE'
+[501] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[502] bbl.pm:757> INFO - Output to main.bbl
+[502] Biber.pm:130> WARN - Possible typo (case mismatch) between citation and datasource keys: 'thesis' and 'THESIS' in file 'lni-paper-example-de.bib'
+[502] Biber.pm:130> WARN - I didn't find a database entry for 'TODS4203-19' (section 0)
+[502] Biber.pm:130> WARN - I didn't find a database entry for 'thesis' (section 0)
+[502] Biber.pm:132> INFO - WARNINGS: 3
