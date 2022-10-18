@@ -402,6 +402,9 @@
     <ClInclude Include="Subscale\SubscaleSeq.h">
       <Filter>Subscale\Sequential</Filter>
     </ClInclude>
+    <ClInclude Include="Clustering\MultithreadedClustering.h">
+      <Filter>Clustering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Clustering\Clustering.cpp">
@@ -453,6 +456,10 @@
     <ClCompile Include="Subscale\SubscaleSeq.cpp">
       <Filter>Subscale\Sequential</Filter>
     </ClCompile>
+    <ClCompile Include="Clustering\MultithreadedClustering.cpp">
+      <Filter>Clustering</Filter>
+    </ClCompile>
+    <ClCompile Include="Bindings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

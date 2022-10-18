@@ -45,6 +45,9 @@
     <ClInclude Include="BinomialCoeffCreator\LocalBinomialCoeffCreator.cuh" />
     <ClInclude Include="BinomialCoeffCreator\UnifiedBinomialCoeffCreator.cuh" />
     <ClInclude Include="Clustering\Clustering.h" />
+    <ClInclude Include="Clustering\MultithreadedClustering.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="CoreSetCreator\CoreSetCreator.h" />
     <ClInclude Include="CsvDataHandler\CsvDataHandler.h" />
     <ClInclude Include="DenseUnitCreator\DenseUnitCreator.cuh" />
@@ -105,7 +108,13 @@
     <ClInclude Include="TimeMeasurement\TimeMeasurement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bindings.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Clustering\Clustering.cpp" />
+    <ClCompile Include="Clustering\MultithreadedClustering.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="CoreSetCreator\CoreSetCreator.cpp" />
     <ClCompile Include="CsvDataHandler\CsvDataHandler.cpp" />
     <ClCompile Include="DenseUnitCreator\DenseUnitCreatorSeq.cpp" />
@@ -113,7 +122,9 @@
     <ClCompile Include="DoubleHashing\DoubleHash.cpp" />
     <ClCompile Include="HelperFunctions\roundingFunctions.cpp" />
     <ClCompile Include="LabelGenerator\LabelGenerator.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="SubscaleConfig\SubscaleConfig.cpp" />
     <ClCompile Include="Subscale\ISubscale.cpp" />
     <ClCompile Include="Subscale\Subscale.cpp" />
@@ -129,10 +140,11 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7B30629F-9667-4CEE-AB1C-3A994DC886DE}</ProjectGuid>
     <RootNamespace>SubscaleGPU</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>

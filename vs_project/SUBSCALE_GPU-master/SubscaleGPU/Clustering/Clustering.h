@@ -13,5 +13,6 @@ public:
 	Clustering(int minPoints, double epsilon);
 
 	std::vector<Cluster> calculateClusters(vector<DataPoint> points, LocalSubspaceTable* clusterCandidates);
+	std::vector<Cluster> calculateClusters(vector<DataPoint> points, LocalSubspaceTable* clusterCandidates, vector<int> minPointVector, vector<double> epsilonVector);
 };
 
